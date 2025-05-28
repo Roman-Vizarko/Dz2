@@ -1,0 +1,44 @@
+tasks = []
+
+loop do
+  puts "\n1. Додати задачу"
+  puts "2. Показати всі задачі"
+  puts "3. Видалити задачу"
+  puts "4. Вийти"
+  print "\nОберіть опцію: "
+  choice = gets.chomp
+
+  case choice
+  when "1"
+    print "Введіть нову задачу: "
+    task = gets.chomp
+    tasks << task
+    puts "Задачу додано!"
+  when "2"
+    if tasks.empty?
+      puts "Список задач порожній."
+    else
+      puts "Список задач:"
+      tasks.each_with_index { |task, i| puts "#{i + 1}. #{task}" }
+    end
+  when "3"
+    if tasks.empty?
+      puts "Немає задач для видалення."
+    else
+      tasks.each_with_index { |task, i| puts "#{i + 1}. #{task}" }
+      print "Введіть номер задачі для видалення: "
+      index = gets.chomp.to_i
+      if index.between?(1, tasks.size)
+        removed = tasks.delete_at(index - 1)
+        puts "Задачу '#{removed}' видалено."
+      else
+        puts "Невірний номер задачі."
+      end
+    end
+  when "4"
+    puts "До побачення!"
+    break
+  else
+    puts "Невірний вибір. Спробуйте ще раз."
+  end
+end
