@@ -1,0 +1,14 @@
+sentence = "Я люблю програмування на Ruby!"
+
+result = sentence.split.map do |word|
+  if word.match?(/\A\w+/)
+    main = word[/\w+/]
+    rest = word[main.size..]
+    pig = main[1..] + main[0] + "ay"
+    pig + rest.to_s
+  else
+    word
+  end
+end
+
+puts result.join(" ")
