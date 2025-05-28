@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Форма з перевіркою</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin-top: 5px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="myForm">
+    <label for="name">Ім'я:</label>
+    <input type="text" id="name" name="name">
+    <div class="error" id="nameError"></div>
+
+    <label for="email">Електронна пошта:</label>
+    <input type="email" id="email" name="email">
+    <div class="error" id="emailError"></div>
+
+    <label for="age">Вік:</label>
+    <input type="number" id="age" name="age">
+    <div class="error" id="ageError"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      let valid = true;
+      
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const age = parseInt(document.getElementById("age").value.trim());
+
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("ageError").textContent = "";
+
+      if (name === "") {
+        document.getElementById("nameError").textContent = "Ім'я обов'язкове.";
+        valid = false;
+      }
+
+      if (!email.includes("@")) {
+        document.getElementById("emailError").textContent = "Email має містити '@'.";
+        valid = false;
+      }
+
+      if (isNaN(age) || age <= 0) {
+        document.getElementById("ageError").textContent = "Вік має бути числом більше 0.";
+        valid = false;
+      }
+
+      if (valid) {
+        alert("Форму подано!");
+        // Тут можна додати: this.submit(); якщо потрібна справжня відправка
+      }
+    });
+  </script>
+
+</body>
+</html>
